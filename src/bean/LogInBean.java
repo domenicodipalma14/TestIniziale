@@ -58,9 +58,7 @@ public class LogInBean {
 			return false;
 		}
 		
-		boolean utenteTrovato = LogInController.getInstance().login(username, password);
-		
-		return utenteTrovato;
+		return(LogInController.getInstance().login(username, password));
 	}
 	
 
