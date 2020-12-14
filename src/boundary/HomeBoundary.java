@@ -9,16 +9,8 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-
-
-import javafx.stage.Stage;
 import logic.CaricaScenaController;
-import javafx.scene.Scene;
-import javafx.scene.Node;
-
 
 public class HomeBoundary {
 
@@ -33,17 +25,6 @@ public class HomeBoundary {
 
     @FXML // fx:id="btnSignIn"
     private Button btnSignIn; // Value injected by FXMLLoader
-        
-  
-   /*public void caricaScena(String path, ActionEvent event) throws IOException{
-    	BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("/view/"+path));
-    	Scene scene = new Scene(root);
-    	
-    	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(scene);
-        window.show();
-    }*/
     
     @FXML
     void handleLogIn(ActionEvent event) throws IOException {
