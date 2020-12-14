@@ -2,7 +2,7 @@ package logic;
 
 public class LogInController {
 	
-	private static LogInController INSTANCE = null;
+	private static LogInController istance = null;
 	
 	/**
 	 * singleton
@@ -11,11 +11,11 @@ public class LogInController {
 	}
 	
 	public static LogInController getInstance(){
-		if(INSTANCE == null){
-			INSTANCE = new LogInController();
+		if(istance == null){
+			istance = new LogInController();
 		}
 		
-		return INSTANCE;
+		return istance;
 	}
 
 	public boolean login(String username, String password){
