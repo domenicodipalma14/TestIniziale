@@ -1,0 +1,43 @@
+body{
+	background-image: url("../img/background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.loginbtn{
+	background-color: grey;
+	border-color: yellow;
+	margin-top: 20%;
+	color: white;
+}
+
+.loginbtn:hover{
+	opacity: 1;
+	background-color: grey;
+	border-color: yellow;
+	margin-top: 20%;
+}
+
+.logincont{
+	/*background-color: white;*/
+	backdrop-filter: blur(4px);
+	border-radius:20px;
+	margin-top: 10%;
+	/*border-color: red;
+	border-style: solid;*/
+	
+}
+
+.logincont label{
+	color: yellow;
+}
+
+.logincont p{
+	font-size: 400%;
+	color: yellow;
+}
+
+.logincont input{
+	border-radius: 10px;
+	width: 90%;
+}
