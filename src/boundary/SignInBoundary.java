@@ -70,7 +70,6 @@ public class SignInBoundary {
         	c.caricaScena();
     	}
     	else if(check == -1){
-    		System.out.println("NO");
     		label.setText("Email non valida");
     	}
     	else if(check == 2){
