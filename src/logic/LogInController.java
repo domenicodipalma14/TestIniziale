@@ -1,7 +1,5 @@
 package logic;
 
-import bean.LogInBean;
-
 public class LogInController {
 	
 	private static LogInController INSTANCE = null;

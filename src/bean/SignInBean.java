@@ -1,10 +1,6 @@
 package bean;
 
 import logic.LogInController;
-import logic.RegistraDatiController;
-import logic.SignInController;
-
-import java.util.regex.Matcher; 
 import java.util.regex.Pattern;
 
 public class SignInBean {

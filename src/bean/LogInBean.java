@@ -13,6 +13,7 @@ public class LogInBean {
 	
 	
 	public LogInBean() {
+		//devo pensare bene
 	}
 
 
@@ -59,7 +60,7 @@ public class LogInBean {
 		
 		boolean utenteTrovato = LogInController.getInstance().login(username, password);
 		
-		return utenteTrovato!=false;
+		return utenteTrovato;
 	}
 	
 
