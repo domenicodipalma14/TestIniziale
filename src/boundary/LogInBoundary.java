@@ -7,14 +7,9 @@ import java.util.ResourceBundle;
 import bean.LogInBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import logic.CaricaScenaController;
 
 public class LogInBoundary {
@@ -56,7 +51,7 @@ public class LogInBoundary {
     	bean.setPassword(pas);
     	bean.setUsername(usr);
     	boolean es = bean.validate();
-    	if(es == true){
+    	if(es){
     		String path = "UserHome.fxml";
     		CaricaScenaController c = new CaricaScenaController(path, event);
         	c.caricaScena();
