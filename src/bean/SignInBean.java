@@ -11,6 +11,7 @@ public class SignInBean {
 	private String confPass;
 	
 	public SignInBean(){
+		//devo vedere
 	}
 
 	/**
@@ -119,7 +120,7 @@ public class SignInBean {
 		    		 * se utente appena inserito viene trovato return 0 e cambio scena 
 		    		 */
 		    		
-					return 0;
+		    			return 0;
 				}else return 1;
 			}
 			else return 2;
