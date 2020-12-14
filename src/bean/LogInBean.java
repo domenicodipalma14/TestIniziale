@@ -3,7 +3,6 @@ package bean;
 import logic.LogInController;
 
 /**
- * POJO
  * @author DOMENICO
  *
  */
@@ -54,7 +53,7 @@ public class LogInBean {
 	 * @return true se il login ha successo
 	 */
 	public boolean validate(){
-		if(username == null || username == "" || password==null || password==""){
+		if(username == null || username.equals("") || password==null || password.equals("")){
 			return false;
 		}
 		
