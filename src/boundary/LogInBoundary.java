@@ -45,7 +45,7 @@ public class LogInBoundary {
     }
   
     @FXML
-    void handleLogIn(ActionEvent event) throws IOException {
+    void handleLogIn(ActionEvent event) throws Exception {
     	String usr = txtUsername.getText();
     	String pas = txtPassword.getText();
     	bean.setPassword(pas);

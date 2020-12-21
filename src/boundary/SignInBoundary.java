@@ -57,7 +57,7 @@ public class SignInBoundary {
     }
 
     @FXML
-    void handleSignIn(ActionEvent event) throws IOException {
+    void handleSignIn(ActionEvent event) throws Exception {
     	bean.setEmail(txtEmail.getText());
     	bean.setConfEmail(txtCheckEmail.getText());
     	bean.setPassword(txtPasswd.getText());

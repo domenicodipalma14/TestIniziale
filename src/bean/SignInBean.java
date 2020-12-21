@@ -100,8 +100,9 @@ public class SignInBean {
 	/**
 	 * metodo che controlla la validità dei dati inseriti
 	 * @return -1 se email non valida, 0 se tutto giusto, 1 se password non corrispondono, 2 se email non corrispondono
+	 * @throws Exception 
 	 */
-	public int validate(){
+	public int validate() throws Exception{
 		if(isValid(getEmail())){
 			if(getEmail().compareTo(getConfEmail())==0) {
 				if(getPassword().compareTo(getConfPass())==0){

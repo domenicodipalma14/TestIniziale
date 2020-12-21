@@ -1,9 +1,15 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.UtenteDao;
+import entity.Utente;
+
 public class LogInController {
 	
 	private static LogInController istance = null;
-	
+	private Utente u;
 	/**
 	 * singleton
 	 */
@@ -18,17 +24,21 @@ public class LogInController {
 		return istance;
 	}
 
-	public boolean login(String username, String password){
-		boolean esito;
-		/**
-		 * check sul db
-		 */
-		if(username.compareTo("Mario")==0 && password.compareTo("cazzo")==0){
-			esito = true;
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return l[0] = username, l[1] = email, l[2] = password
+	 * @throws Exception
+	 */
+	public boolean login(String username, String password) throws Exception{
+		UtenteDao ud = new UtenteDao();
+		List<String> l = new ArrayList<String>();
+		l = ud.cerca(username, password);
+		if(l!= null){
+			u = new Utente(l.get(0), l.get(2), l.get(1));
+			return true;
 		}
-		else{
-			esito = false;
-		}
-		return esito;
+		else return false;
 	}
 }

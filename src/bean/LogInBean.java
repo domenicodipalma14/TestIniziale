@@ -52,8 +52,9 @@ public class LogInBean {
 	 * controlla se i dati iseriti sono validi, in caso di validità dei dati 
 	 * chiama il login per controllare se l'utente è presente nel db
 	 * @return true se il login ha successo
+	 * @throws Exception 
 	 */
-	public boolean validate(){
+	public boolean validate() throws Exception{
 		if(username == null || username.equals("") || password==null || password.equals("")){
 			return false;
 		}
