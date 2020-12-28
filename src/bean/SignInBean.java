@@ -6,6 +6,9 @@ import logic.SignInController;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
+import error.DBException;
+import error.DriverException;
+
 public class SignInBean {
 	private String username;
 	private String email;
@@ -149,9 +152,11 @@ public class SignInBean {
 	/**
 	 * metodo che controlla la validità dei dati inseriti
 	 * @return -1 se email non valida, 0 se tutto giusto, 1 se password non corrispondono, 2 se email non corrispondono
+	 * @throws DBException 
+	 * @throws DriverException 
 	 * @throws Exception 
 	 */
-	public int validate() throws Exception{
+	public int validate() throws DriverException, DBException{
 		if(isValid(getEmail())){
 			if(getEmail().compareTo(getConfEmail())==0) {
 				if(getPassword().compareTo(getConfPass())==0){

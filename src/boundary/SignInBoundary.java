@@ -14,6 +14,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import logic.CaricaScenaController;
 import bean.SignInBean;
+import error.DBException;
+import error.DriverException;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 
@@ -67,7 +69,7 @@ public class SignInBoundary {
     }
 
     @FXML
-    void handleSignIn(ActionEvent event) throws Exception {
+    void handleSignIn(ActionEvent event) throws DriverException, DBException, IOException{
     	bean.setEmail(txtEmail.getText());
     	bean.setConfEmail(txtCheckEmail.getText());
     	bean.setPassword(txtPasswd.getText());

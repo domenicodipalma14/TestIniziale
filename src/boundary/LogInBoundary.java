@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import bean.LogInBean;
+import error.DBException;
+import error.DriverException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,25 +47,22 @@ public class LogInBoundary {
     }
   
     @FXML
-    void handleLogIn(ActionEvent event){
+    void handleLogIn(ActionEvent event) throws DriverException, DBException, IOException{
     	String usr = txtUsername.getText();
     	String pas = txtPassword.getText();
     	bean.setPassword(pas);
     	bean.setUsername(usr);
     	boolean es;
-		try {
-			es = bean.validate();
-			if(es){
-	    		String path = "UserHome.fxml";
-	    		CaricaScenaController c = new CaricaScenaController(path, event);
-	        	c.caricaScena();
-	    	}
-	    	else{
-	    		txtLabel.setText("DATI NON VALIDI");
-	    	}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    	es = bean.validate();
+		if(es){
+	    	String path = "UserHome.fxml";
+	    	CaricaScenaController c = new CaricaScenaController(path, event);
+	        c.caricaScena();
+	    }
+	    else{
+	    	txtLabel.setText("DATI NON VALIDI");
+	    }
+		
     	
     }
 
