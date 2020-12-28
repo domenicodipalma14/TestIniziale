@@ -38,7 +38,7 @@ public class LogInController {
 	 */
 	public boolean login(String username, String password) throws DriverException, DBException{
 		UtenteDao ud = new UtenteDao();
-		List<String> l; // = new ArrayList<>();
+		List<String> l;
 		l = ud.cerca(username, password);
 		if(!l.isEmpty()){
 			u.setUsername(l.get(0));
