@@ -1,11 +1,13 @@
 package connessionedb;
 
-import java.io.File;
+/*import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.InputStream;*/
 import java.sql.*;
 
-import logic.LogInController;
+import error.DBException;
+import error.DriverException;
+//import logic.LogInController;
 
 public class ConnessioneDB {
 	private Connection connect = null;
@@ -33,44 +35,48 @@ public class ConnessioneDB {
 	/**
 	 * metodo che crea una connessione con il db
 	 * @return 
+	 * @throws DBException 
+	 * @throws ClassNotFoundException 
+	 * @throws  
 	 * @throws Exception
 	 */
 	
 	
 	
-	public Connection createConnessione() throws Exception {
-	    try {
-	    	//Properties p = new Properties();
-	    	/*String username="fghjk";
-	    	String password="fghjk";
-	    	List<String> l = new ArrayList<String>();*/
-	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	connect = DriverManager.getConnection("jdbc:mysql://"+host+"/decimo?user="+user+"&password="+passwd+"&serverTimezone=UTC");
-	    	return connect;
-	    	/*statement = connect.createStatement();
-	    	resultSet = statement.executeQuery("SELECT username, email, passwd FROM Utente WHERE username='"+ username +"' AND passwd='" + password + "';" );
-	    	System.out.println(resultSet);
-	    	if(!resultSet.next()) return connect;
-	    	l.add(resultSet.getString("username"));
-	    	System.out.println(l.get(0));
-	    	return connect;
-	    	/*statement = connect.createStatement();
-	    	resultSet = statement.executeUpdate("INSERT INTO Utente (username, email, password) VALUES ('LoSpagnolo', 'lospagnolo@gmail.com', '1234')");*/
+	public Connection createConnessione() throws DriverException, DBException{
+	    	try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				connect = DriverManager.getConnection("jdbc:mysql://"+host+"/decimo?user="+user+"&password="+passwd+"&serverTimezone=UTC");
+				return connect;
+			} catch (ClassNotFoundException e1) {
+				throw new DriverException(e1.getMessage());
+			} catch (SQLException e) {
+				throw new DBException(e.getMessage());
+			}
+	    	finally{
+	    		try {
+					connect.close();
+				} catch (SQLException e) {
+					throw new DBException(e.getMessage());
+				}
+	    	}
 	    	
-	    	
-	    } catch (Exception e) {
-	      throw e;
-	    }
 	  }
 	
-	public void chiudi(Statement stm, Connection c, ResultSet res) throws SQLException{
-		res.close();
-        stm.close();
-        c.close();
+	public void chiudi(Statement stm, Connection c, ResultSet res) throws DBException{
+		try {
+			res.close();
+			stm.close();
+			c.close();
+		} catch (SQLException e) {
+			throw new DBException(e.getMessage());
+		}
+        
+       
 	}
 	
 	
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		File file = new File("../IlDecimo/WebContent/img/img.jpg");
 		FileInputStream fis = new FileInputStream(file);
 		ConnessioneDB conn = getIstance();
@@ -82,15 +88,14 @@ public class ConnessioneDB {
 		stm.setBlob(1, in);
 		stm.execute();
 		conn.chiudi(stm, c);
-	}
+	}*/
 
-
-	public void chiudi(Statement stm, Connection c) {
+	public void chiudi(Statement stm, Connection c) throws DBException {
 		 try {
 			stm.close();
 		    c.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DBException(e.getMessage());
 		}
 	 
 	}

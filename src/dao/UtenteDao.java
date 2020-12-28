@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connessionedb.ConnessioneDB;
-import entity.Utente;
+import error.DBException;
+import error.DriverException;
 
 
 public class UtenteDao{
@@ -17,27 +18,28 @@ public class UtenteDao{
 	//private ConnessioneDB conn = new ConnessioneDB();
 	
 	private ConnessioneDB conn = ConnessioneDB.getIstance();
-	private Utente u;
 	private List<String> lista = new ArrayList<String>();
 
-	public List<String> cerca(String username, String password) throws Exception{
+	public List<String> cerca(String username, String password) throws DriverException, DBException{
 		Connection c = conn.createConnessione();
-		Statement stm = c.createStatement();
-		ResultSet res = stm.executeQuery("SELECT username, email, passwd, nome, cognome FROM Utente WHERE username='"+ username +"' AND passwd='" + password + "';" );
-		
-		if(!res.next()) return null;
-		lista.add(res.getString("username"));
-		lista.add(res.getString("email"));
-		lista.add(res.getString("passwd"));
-		lista.add(res.getString("nome"));
-		lista.add(res.getString("cognome"));
-        /*String user = res.getString("username");
-        String email = res.getString("email");
-        String passwd = res.getString("password");
-		u = new Utente(user, passwd, email);*/
-		
-		conn.chiudi(stm, c, res);
-		return lista;
+		Statement stm;
+		try {
+			stm = c.createStatement();
+			ResultSet res = stm.executeQuery("SELECT username, email, passwd, nome, cognome FROM Utente WHERE username='"+ username +"' AND passwd='" + password + "';" );
+			if(!res.next()){
+				conn.chiudi(stm, c, res);
+				return null;
+			}
+			lista.add(res.getString("username"));
+			lista.add(res.getString("email"));
+			lista.add(res.getString("passwd"));
+			lista.add(res.getString("nome"));
+			lista.add(res.getString("cognome"));
+			conn.chiudi(stm, c, res);
+			return lista;
+		} catch (SQLException e) {
+			throw new DBException(e.getMessage());
+		}	
 	}
 	
 	public int inserisci(String username, String password, String email, String nome, String cognome, LocalDate data) throws Exception{

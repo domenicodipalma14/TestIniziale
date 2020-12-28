@@ -45,20 +45,26 @@ public class LogInBoundary {
     }
   
     @FXML
-    void handleLogIn(ActionEvent event) throws Exception {
+    void handleLogIn(ActionEvent event){
     	String usr = txtUsername.getText();
     	String pas = txtPassword.getText();
     	bean.setPassword(pas);
     	bean.setUsername(usr);
-    	boolean es = bean.validate();
-    	if(es){
-    		String path = "UserHome.fxml";
-    		CaricaScenaController c = new CaricaScenaController(path, event);
-        	c.caricaScena();
-    	}
-    	else{
-    		txtLabel.setText("DATI NON VALIDI");
-    	}
+    	boolean es;
+		try {
+			es = bean.validate();
+			if(es){
+	    		String path = "UserHome.fxml";
+	    		CaricaScenaController c = new CaricaScenaController(path, event);
+	        	c.caricaScena();
+	    	}
+	    	else{
+	    		txtLabel.setText("DATI NON VALIDI");
+	    	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

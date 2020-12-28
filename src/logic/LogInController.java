@@ -5,6 +5,8 @@ import java.util.List;
 
 import dao.UtenteDao;
 import entity.Utente;
+import error.DBException;
+import error.DriverException;
 
 public class LogInController {
 	
@@ -29,9 +31,11 @@ public class LogInController {
 	 * @param username
 	 * @param password
 	 * @return l[0] = username, l[1] = email, l[2] = password, l[3] = nome, l[4] = cognome
+	 * @throws DriverException 
+	 * @throws DBException 
 	 * @throws Exception
 	 */
-	public boolean login(String username, String password) throws Exception{
+	public boolean login(String username, String password) throws DriverException, DBException{
 		UtenteDao ud = new UtenteDao();
 		List<String> l = new ArrayList<String>();
 		l = ud.cerca(username, password);
@@ -41,10 +45,10 @@ public class LogInController {
 			u.setPassword(l.get(2));
 			u.setNome(l.get(3));
 			u.setCognome(l.get(4));
-			//u = new Utente(l.get(0), l.get(2), l.get(1));
 			return true;
 		}
 		else return false;
+		
 	}
 	
 	public Utente getUtente(){

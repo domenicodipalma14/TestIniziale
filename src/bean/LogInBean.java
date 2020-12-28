@@ -1,5 +1,7 @@
 package bean;
 
+import error.DBException;
+import error.DriverException;
 import logic.LogInController;
 
 /**
@@ -52,9 +54,11 @@ public class LogInBean {
 	 * controlla se i dati iseriti sono validi, in caso di validità dei dati 
 	 * chiama il login per controllare se l'utente è presente nel db
 	 * @return true se il login ha successo
+	 * @throws DBException 
+	 * @throws DriverException 
 	 * @throws Exception 
 	 */
-	public boolean validate() throws Exception{
+	public boolean validate() throws DriverException, DBException{
 		if(username == null || username.equals("") || password==null || password.equals("")){
 			return false;
 		}
