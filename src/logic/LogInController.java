@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +34,14 @@ public class LogInController {
 	 * @return l[0] = username, l[1] = email, l[2] = password, l[3] = nome, l[4] = cognome
 	 * @throws DriverException 
 	 * @throws DBException 
+	 * @throws SQLException 
 	 * @throws Exception
 	 */
 	public boolean login(String username, String password) throws DriverException, DBException{
 		UtenteDao ud = new UtenteDao();
 		List<String> l = new ArrayList<String>();
 		l = ud.cerca(username, password);
-		if(l!= null){
+		if(!l.isEmpty()){
 			u.setUsername(l.get(0));
 			u.setEmail(l.get(1));
 			u.setPassword(l.get(2));

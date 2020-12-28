@@ -8,9 +8,9 @@ import error.DriverException;
 
 public class ConnessioneDB {
 	private Connection connect = null;
-	private static final String host = "localhost:3306";
-	private final String user = "decimo";
-	private final String passwd = "IlDecimoDB10";
+	private static final String HOST = "localHOST:3306";
+	private static final String USER = "decimo";
+	private static final String PASSWD = "IlDecimoDB10";
 	
 	private static ConnessioneDB istance = null;
 
@@ -33,6 +33,7 @@ public class ConnessioneDB {
 	 * metodo che crea una connessione con il db
 	 * @return 
 	 * @throws DBException 
+	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 * @throws  
 	 * @throws Exception
@@ -43,21 +44,13 @@ public class ConnessioneDB {
 	public Connection createConnessione() throws DriverException, DBException{
 	    	try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				connect = DriverManager.getConnection("jdbc:mysql://"+host+"/decimo?user="+user+"&password="+passwd+"&serverTimezone=UTC");
+				connect = DriverManager.getConnection("jdbc:mysql://"+HOST+"/decimo?USER="+USER+"&password="+PASSWD+"&serverTimezone=UTC");
 				return connect;
 			} catch (ClassNotFoundException e1) {
 				throw new DriverException(e1.getMessage());
 			} catch (SQLException e) {
 				throw new DBException(e.getMessage());
 			}
-	    	finally{
-	    		try {
-					connect.close();
-				} catch (SQLException e) {
-					throw new DBException(e.getMessage());
-				}
-	    	}
-	    	
 	  }
 	
 	public void chiudi(Statement stm, Connection c, ResultSet res) throws DBException{

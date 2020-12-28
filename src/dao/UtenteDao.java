@@ -1,11 +1,9 @@
 package dao;
 
-
-
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import connessionedb.ConnessioneDB;
@@ -14,11 +12,8 @@ import error.DriverException;
 
 
 public class UtenteDao{
-	
-	//private ConnessioneDB conn = new ConnessioneDB();
-	
 	private ConnessioneDB conn = ConnessioneDB.getIstance();
-	private List<String> lista = new ArrayList<String>();
+	private List<String> lista = new ArrayList<>();
 
 	public List<String> cerca(String username, String password) throws DriverException, DBException{
 		Connection c = conn.createConnessione();
@@ -28,7 +23,7 @@ public class UtenteDao{
 			ResultSet res = stm.executeQuery("SELECT username, email, passwd, nome, cognome FROM Utente WHERE username='"+ username +"' AND passwd='" + password + "';" );
 			if(!res.next()){
 				conn.chiudi(stm, c, res);
-				return null;
+				return Collections.emptyList();
 			}
 			lista.add(res.getString("username"));
 			lista.add(res.getString("email"));
@@ -42,7 +37,7 @@ public class UtenteDao{
 		}	
 	}
 	
-	public int inserisci(String username, String password, String email, String nome, String cognome, LocalDate data) throws Exception{
+	public int inserisci(String username, String password, String email, String nome, String cognome, LocalDate data) throws DriverException, DBException, SQLException{
 		Connection c = conn.createConnessione();
 		Statement stm = c.createStatement();
 		int  res = stm.executeUpdate("INSERT INTO Utente (username, email, passwd, nome, cognome, nascita) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+nome+"' , '"+cognome+"' , '"+data+"')");
