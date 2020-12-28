@@ -1,6 +1,11 @@
 package connessionedb;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
+
+import logic.LogInController;
 
 public class ConnessioneDB {
 	private Connection connect = null;
@@ -8,6 +13,23 @@ public class ConnessioneDB {
 	final private String user = "decimo";
 	final private String passwd = "IlDecimoDB10";
 	
+	private static ConnessioneDB istance = null;
+
+	
+	private ConnessioneDB(){
+		
+		
+	}
+	
+	
+	public static ConnessioneDB getIstance(){
+		if(istance == null){
+			istance = new ConnessioneDB();
+		}
+		
+		return istance;
+		
+	}
 	/**
 	 * metodo che crea una connessione con il db
 	 * @return 
@@ -49,9 +71,30 @@ public class ConnessioneDB {
 	
 	
 	public static void main(String[] args) throws Exception {
-		ConnessioneDB c = new ConnessioneDB();
-		System.out.println(c.createConnessione());
+		File file = new File("../IlDecimo/WebContent/img/img.jpg");
+		FileInputStream fis = new FileInputStream(file);
+		ConnessioneDB conn = getIstance();
+		Connection c = conn.createConnessione();
+		PreparedStatement stm = c.prepareStatement("INSERT INTO Immagine (imm) VALUES (?)");
+		//String query = "INSERT INTO Immagine (imm) VALUES (?)";
+		//PreparedStatement pstmt = c.prepareStatement(query);
+		InputStream in = new FileInputStream("../IlDecimo/WebContent/img/img.jpg");
+		stm.setBlob(1, in);
+		stm.execute();
+		conn.chiudi(stm, c);
 	}
+
+
+	public void chiudi(Statement stm, Connection c) {
+		 try {
+			stm.close();
+		    c.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	 
+	}
+
 	
 }
 	 

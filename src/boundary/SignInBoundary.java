@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import logic.CaricaScenaController;
 import bean.SignInBean;
@@ -29,7 +30,13 @@ public class SignInBoundary {
 
     @FXML // fx:id="txtEmail"
     private TextField txtEmail; // Value injected by FXMLLoader
-
+    
+    @FXML 
+    private TextField txtNome; 
+    
+    @FXML 
+    private TextField txtCognome; 
+    
     @FXML
     private PasswordField txtPasswd;
 
@@ -44,6 +51,9 @@ public class SignInBoundary {
 
     @FXML // fx:id="btnSigIn"
     private Button btnSigIn; // Value injected by FXMLLoader
+    
+    @FXML
+    private DatePicker txtData;
     
     @FXML
     private Label label;
@@ -63,6 +73,9 @@ public class SignInBoundary {
     	bean.setPassword(txtPasswd.getText());
     	bean.setConfPass(txtCheckPaswd.getText());
     	bean.setUsername(txtUsername.getText());
+    	bean.setNome(txtNome.getText());
+    	bean.setCognome(txtCognome.getText());
+    	bean.setData(txtData.getValue());
     	int check = bean.validate();
     	if(check==0){
     		String path = "UserHome.fxml";
@@ -85,13 +98,24 @@ public class SignInBoundary {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'SignIn.fxml'.";
+        /*assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert txtEmail != null : "fx:id=\"txtEmail\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert txtPasswd != null : "fx:id=\"txtPasswd\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert txtCheckPaswd != null : "fx:id=\"txtCheckPaswd\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert txtCheckEmail != null : "fx:id=\"txtCheckEmail\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert btnAnnulla != null : "fx:id=\"btnAnnulla\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert btnSigIn != null : "fx:id=\"btnSigIn\" was not injected: check your FXML file 'SignIn.fxml'.";*/
+    	assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert txtEmail != null : "fx:id=\"txtEmail\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert txtCheckEmail != null : "fx:id=\"txtCheckEmail\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert txtPasswd != null : "fx:id=\"txtPasswd\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert txtCheckPaswd != null : "fx:id=\"txtCheckPaswd\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert txtNome != null : "fx:id=\"txtNome\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert txtCognome != null : "fx:id=\"txtCognome\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert txtData != null : "fx:id=\"txtData\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert btnAnnulla != null : "fx:id=\"btnAnnulla\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert btnSigIn != null : "fx:id=\"btnSigIn\" was not injected: check your FXML file 'SignIn.fxml'.";
+        assert label != null : "fx:id=\"label\" was not injected: check your FXML file 'SignIn.fxml'.";
 
     }
 }

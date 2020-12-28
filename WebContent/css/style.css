@@ -23,6 +23,7 @@ body{
 	backdrop-filter: blur(4px);
 	border-radius:20px;
 	margin-top: 10%;
+	margin-left: 7%;
 	/*border-color: red;
 	border-style: solid;*/
 	
@@ -40,4 +41,97 @@ body{
 .logincont input{
 	border-radius: 10px;
 	width: 90%;
+}
+
+.signincont{
+	backdrop-filter: blur(4px);
+	border-radius:20px;
+	margin-top: 10%;
+}
+
+.signincont label{
+	color: yellow;
+}
+
+.signincont p{
+	font-size: 400%;
+	color: yellow;
+}
+
+.signincont input{
+	border-radius: 10px;
+	width: 90%;
+	margin-bottom: 1%;
+}
+
+.btnbar{
+	margin-top: 0.5%;
+    width: 100%;
+}
+
+.btnbar:hover{
+	opacity: 1;
+	background-color: grey;
+	border-color: yellow;
+	margin-top: 0.5%;
+}
+
+.registrati p{
+	font-size: 164%;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.txt{
+	margin-top: 15%;
+	backdrop-filter: blur(4px);
+	border-radius: 20px;
+}
+
+.txt p{
+	color: yellow;
+	font-size: 124%;
+}
+
+.txt h1{
+	color: yellow;
+    font-size: 279%;
+}
+
+.barra{
+	background-color: black;
+}
+
+.barra a{
+	color: yellow;
+}
+
+.signinerr p{
+	color: red;
+	font-size: 200%;
+}
+
+.badge {
+    position: relative;
+    top: -11px;
+    right: 14px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+}
+
+.dot a:hover{
+  background-color: grey;
+  border-radius: 50%;
+}
+
+.navbar-nav>li>.menu1{
+	background-color: #C9C5BA;
+    border-radius: 10%;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+    border-bottom-left-radius: 10%;
+    margin-top: 18%;
 }

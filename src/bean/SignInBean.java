@@ -1,6 +1,9 @@
 package bean;
 
 import logic.LogInController;
+import logic.SignInController;
+
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class SignInBean {
@@ -10,6 +13,52 @@ public class SignInBean {
 	private String password;
 	private String confPass;
 	
+	private String nome;
+	private String cognome;
+	private LocalDate data;
+	
+	/**
+	 * @return the data
+	 */
+	public LocalDate getData() {
+		return data;
+	}
+
+	/**
+	 * @param data the data to set
+	 */
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
+	 * @return the cognome
+	 */
+	public String getCognome() {
+		return cognome;
+	}
+
+	/**
+	 * @param cognome the cognome to set
+	 */
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
 	public SignInBean(){
 		//devo vedere
 	}
@@ -106,22 +155,12 @@ public class SignInBean {
 		if(isValid(getEmail())){
 			if(getEmail().compareTo(getConfEmail())==0) {
 				if(getPassword().compareTo(getConfPass())==0){
-					/**
-					 * if(controllo db) return 0; else return 3;
-					 * se username valido, registra dati nel db
-					 */
-					
-					/**
-					 * decidere se lasciare
-					 * RegistraDatiController reg = new RegistraDatiController();
-					 * reg.insericiDatiDb(bean);
-		    		*/
-		    		if(LogInController.getInstance().login(username, password))
-		    		/*
-		    		 * se utente appena inserito viene trovato return 0 e cambio scena 
-		    		 */
-		    		
-		    			return 0;
+				
+					if(SignInController.getIstance().registrati(getUsername(), getPassword(), getConfPass(), getConfEmail(), getEmail(), getNome(), getCognome(), getData())){
+						LogInController.getInstance().login(username, password);
+						return 0;
+					}
+					return -2;
 				}else return 1;
 			}
 			else return 2;
