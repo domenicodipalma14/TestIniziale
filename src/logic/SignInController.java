@@ -9,7 +9,7 @@ public class SignInController {
 	private static SignInController istance = null;
 	
 	
-	public SignInController() {
+	private SignInController() {
 	}
 	
 	public static SignInController getIstance(){
@@ -23,8 +23,8 @@ public class SignInController {
 	public boolean registrati(String username, String password, String email, String nome, String cognome, LocalDate data){
 		UtenteDao u = new UtenteDao();
 		try {
-			if(u.cerca(username, password)== null){
-					if(u.inserisci(username, password, email, nome , cognome, data)>0) return true;
+			if(u.cerca(username, password)== null && u.inserisci(username, password, email, nome , cognome, data)>0){
+					return true;
 			}
 			return false;
 		} catch (Exception e) {
