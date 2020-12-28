@@ -43,8 +43,8 @@ public class ConnessioneDB {
 	public Connection createConnessione() throws DriverException, DBException{
 	    	try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection connect = DriverManager.getConnection("jdbc:mysql://"+HOST+"/decimo?USER="+USER+"&password="+PASSWD+"&serverTimezone=UTC");
-				return connect;
+				return ( DriverManager.getConnection("jdbc:mysql://"+HOST+"/decimo?USER="+USER+"&password="+PASSWD+"&serverTimezone=UTC"));
+				
 			} catch (ClassNotFoundException e1) {
 				throw new DriverException(e1.getMessage());
 			} catch (SQLException e) {

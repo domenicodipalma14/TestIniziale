@@ -20,14 +20,11 @@ public class SignInController {
 	}
 	
 
-	public boolean registrati(String username, String password, String confPassword, String confEmail, String email, String nome, String cognome, LocalDate data){
+	public boolean registrati(String username, String password, String email, String nome, String cognome, LocalDate data){
 		UtenteDao u = new UtenteDao();
 		try {
 			if(u.cerca(username, password)== null){
-				if(password.equals(confPassword) && email.equals(confEmail)) {
 					if(u.inserisci(username, password, email, nome , cognome, data)>0) return true;
-				}
-				return false;
 			}
 			return false;
 		} catch (Exception e) {

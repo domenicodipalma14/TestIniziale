@@ -161,7 +161,7 @@ public class SignInBean {
 			if(getEmail().compareTo(getConfEmail())==0) {
 				if(getPassword().compareTo(getConfPass())==0){
 				
-					if(SignInController.getIstance().registrati(getUsername(), getPassword(), getConfPass(), getConfEmail(), getEmail(), getNome(), getCognome(), getData())){
+					if(SignInController.getIstance().registrati(getUsername(), getPassword(), getEmail(), getNome(), getCognome(), getData())){
 						LogInController.getInstance().login(username, password);
 						return 0;
 					}
