@@ -100,13 +100,6 @@ public class SignInBoundary {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        /*assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'SignIn.fxml'.";
-        assert txtEmail != null : "fx:id=\"txtEmail\" was not injected: check your FXML file 'SignIn.fxml'.";
-        assert txtPasswd != null : "fx:id=\"txtPasswd\" was not injected: check your FXML file 'SignIn.fxml'.";
-        assert txtCheckPaswd != null : "fx:id=\"txtCheckPaswd\" was not injected: check your FXML file 'SignIn.fxml'.";
-        assert txtCheckEmail != null : "fx:id=\"txtCheckEmail\" was not injected: check your FXML file 'SignIn.fxml'.";
-        assert btnAnnulla != null : "fx:id=\"btnAnnulla\" was not injected: check your FXML file 'SignIn.fxml'.";
-        assert btnSigIn != null : "fx:id=\"btnSigIn\" was not injected: check your FXML file 'SignIn.fxml'.";*/
     	assert txtUsername != null : "fx:id=\"txtUsername\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert txtEmail != null : "fx:id=\"txtEmail\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert txtCheckEmail != null : "fx:id=\"txtCheckEmail\" was not injected: check your FXML file 'SignIn.fxml'.";
