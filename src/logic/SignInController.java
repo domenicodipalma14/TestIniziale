@@ -25,8 +25,6 @@ public class SignInController {
 
 	public boolean registrati(String username, String password, String email, String nome, String cognome, LocalDate data) throws DriverException, DBException, SQLException{
 		UtenteDao u = new UtenteDao();
-		if(u.cerca(username, password).isEmpty() && u.inserisci(username, password, email, nome , cognome, data)>0) return true;
-		return false;
-	
+		return (u.cerca(username, password).isEmpty() && u.inserisci(username, password, email, nome , cognome, data)>0);
 	}
 }
