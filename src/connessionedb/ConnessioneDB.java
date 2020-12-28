@@ -7,8 +7,7 @@ import error.DriverException;
 
 
 public class ConnessioneDB {
-	private Connection connect = null;
-	private static final String HOST = "localHOST:3306";
+	private static final String HOST = "localhost:3306";
 	private static final String USER = "decimo";
 	private static final String PASSWD = "IlDecimoDB10";
 	
@@ -44,7 +43,7 @@ public class ConnessioneDB {
 	public Connection createConnessione() throws DriverException, DBException{
 	    	try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				connect = DriverManager.getConnection("jdbc:mysql://"+HOST+"/decimo?USER="+USER+"&password="+PASSWD+"&serverTimezone=UTC");
+				Connection connect = DriverManager.getConnection("jdbc:mysql://"+HOST+"/decimo?USER="+USER+"&password="+PASSWD+"&serverTimezone=UTC");
 				return connect;
 			} catch (ClassNotFoundException e1) {
 				throw new DriverException(e1.getMessage());
