@@ -12,9 +12,103 @@ import error.DriverException;
 
 
 public class UtenteDao{
-	private ConnessioneDB conn = ConnessioneDB.getIstance();
+	private static ConnessioneDB conn = ConnessioneDB.getIstance();
 	private List<String> lista = new ArrayList<>();
+	private List<Boolean> tipo = new ArrayList<>();
 
+	public static boolean setOrganizzatoreDB(String username) throws DBException, DriverException{
+		Connection c = conn.createConnessione();
+		Statement stm;
+		try {
+			stm = c.createStatement();
+			ResultSet res = stm.executeQuery("SELECT organizzatore FROM utente WHERE username='"+username+"'");
+			res.next();
+			boolean b = res.getBoolean("organizzatore");
+			if(b){
+				int ris = stm.executeUpdate("UPDATE Utente SET organizzatore = false WHERE username='"+username+"'");
+				conn.chiudi(stm, c);
+				if(ris!=0) return false;
+			}
+			else{
+				int ris = stm.executeUpdate("UPDATE Utente SET organizzatore = true WHERE username='"+username+"'");
+				if(ris!=0) return true;
+				conn.chiudi(stm, c);
+			}
+			conn.chiudi(stm, c, res);
+			return false;
+		} catch (SQLException e) {
+			throw new DBException(e.getMessage());
+		}
+	}
+	
+	public static boolean setGiocatoreDB(String username) throws DBException, DriverException{
+		Connection c = conn.createConnessione();
+		Statement stm;
+		try {
+			stm = c.createStatement();
+			ResultSet res = stm.executeQuery("SELECT giocatore FROM utente WHERE username='"+username+"'");
+			res.next();
+			boolean b = res.getBoolean("giocatore");
+			if(b){
+				int ris = stm.executeUpdate("UPDATE Utente SET giocatore = false WHERE username='"+username+"'");
+				conn.chiudi(stm, c);
+				if(ris!=0) return false;
+			}
+			else{
+				int ris = stm.executeUpdate("UPDATE Utente SET giocatore = true WHERE username='"+username+"'");
+				if(ris!=0) return true;
+				conn.chiudi(stm, c);
+			}
+			conn.chiudi(stm, c, res);
+			return false;
+		} catch (SQLException e) {
+			throw new DBException(e.getMessage());
+		}
+	}
+	public boolean checkTitolare(String username) throws DriverException, DBException{
+		Connection c = conn.createConnessione();
+		Statement stm;
+		try {
+			stm = c.createStatement();
+			ResultSet res = stm.executeQuery("SELECT * FROM titolare WHERE Utente_username='"+username+"'");
+			if(!res.next()){
+				conn.chiudi(stm, c, res);
+				return false;
+			}
+			return true;
+		} catch (SQLException e) {
+			throw new DBException(e.getMessage());
+		}
+		
+	}
+	
+	
+	/**
+	 * metodo che controlla di che tipo è l'utente(organizzatore/giocatore o titolare di un impianto)
+	 * @param username  dell'utente
+	 * @param password del'utente
+	 * @return lista che contiene al massimo due elmenti 
+	 * @throws DriverException
+	 * @throws DBException
+	 */
+	public List<Boolean> checkTipo(String username) throws DriverException, DBException{
+		Connection c = conn.createConnessione();
+		Statement stm;
+		try {
+			stm = c.createStatement();
+			ResultSet res = stm.executeQuery("SELECT organizzatore, giocatore FROM Utente WHERE username = '"+username+"'");
+			if(!res.next()){
+				conn.chiudi(stm, c, res);
+				return Collections.emptyList();
+			}
+			tipo.add(res.getBoolean("organizzatore"));
+			tipo.add(res.getBoolean("giocatore"));
+			conn.chiudi(stm, c, res);
+			return tipo;
+		} catch (SQLException e) {
+			throw new DBException(e.getMessage());
+		}
+	}
 	public List<String> cerca(String username, String password) throws DriverException, DBException{
 		Connection c = conn.createConnessione();
 		Statement stm;

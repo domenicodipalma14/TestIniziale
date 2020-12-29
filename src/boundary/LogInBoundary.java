@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import logic.CaricaScenaController;
+import logic.LogInController;
 
 public class LogInBoundary {
 
@@ -55,9 +56,16 @@ public class LogInBoundary {
     	boolean es;
     	es = bean.validate();
 		if(es){
-	    	String path = "UserHome.fxml";
-	    	CaricaScenaController c = new CaricaScenaController(path, event);
-	        c.caricaScena();
+			if(LogInController.getInstance().getUtente().isTitolare()){
+				String path = "UserTitolareHome.fxml";
+				CaricaScenaController c = new CaricaScenaController(path, event);
+		        c.caricaScena();	
+			}
+			else{
+				String path = "UserHome.fxml";
+				CaricaScenaController c = new CaricaScenaController(path, event);
+				c.caricaScena();
+			}
 	    }
 	    else{
 	    	txtLabel.setText("DATI NON VALIDI");

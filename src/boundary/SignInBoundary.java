@@ -6,6 +6,7 @@ package boundary;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,7 +70,7 @@ public class SignInBoundary {
     }
 
     @FXML
-    void handleSignIn(ActionEvent event) throws DriverException, DBException, IOException{
+    void handleSignIn(ActionEvent event) throws DriverException, DBException, IOException, SQLException{
     	bean.setEmail(txtEmail.getText());
     	bean.setConfEmail(txtCheckEmail.getText());
     	bean.setPassword(txtPasswd.getText());

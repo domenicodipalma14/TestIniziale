@@ -7,10 +7,13 @@ package boundary;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import entity.Utente;
+import error.DBException;
+import error.DriverException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import logic.LogInController;
+import logic.UserHomeController;
 
 public class UserHomeBoundary {
 
@@ -29,14 +32,73 @@ public class UserHomeBoundary {
     @FXML // fx:id="lbUsername"
     private Label lbUsername; // Value injected by FXMLLoader
     
-    private LogInController lc = LogInController.getInstance();
+    @FXML
+    private Label lbTipoUtente;
+    
+    @FXML
+    private CheckBox checkOrganizzatore;
+
+    @FXML
+    private CheckBox checkGiocatore;
+    
+    
+    @FXML
+    void handleCheckOrganizzatore(ActionEvent event) throws DBException, DriverException{
+    	if(checkOrganizzatore.isSelected()){
+    		if(checkGiocatore.isSelected()) lbTipoUtente.setText("Organizzatore, Giocatore");
+    		else lbTipoUtente.setText("Organizzatore");
+    		UserHomeController.setOrganizzatore();
+    	}
+    	else{
+    		String s = lbTipoUtente.getText();
+    		if(s.equals("Organizzatore, Giocatore")) lbTipoUtente.setText("Giocatore");
+    		else if(s.equals("Organizzatore")) lbTipoUtente.setText("Impostare tipo profilo");
+    		UserHomeController.setOrganizzatore();
+    	}
+    }
+    
+    @FXML
+    void handleCheckGiocatore(ActionEvent event) throws DBException, DriverException{
+    	if(checkGiocatore.isSelected()){
+    		if(checkOrganizzatore.isSelected()) lbTipoUtente.setText("Organizzatore, Giocatore");
+    		else lbTipoUtente.setText("Giocatore");
+    		UserHomeController.setGiocatore();
+    	}
+    	else{
+    		String s = lbTipoUtente.getText();
+    		if(s.equals("Organizzatore, Giocatore")) lbTipoUtente.setText("Organizzatore");
+    		else if(s.equals("Giocatore")) lbTipoUtente.setText("Impostare tipo profilo");
+    		UserHomeController.setGiocatore();
+    	}
+    }
     
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-    	Utente u = lc.getUtente();
-    	lbUsername.setText(u.getUsername());
-    	lbCognome.setText(u.getCognome());
-    	lbNome.setText(u.getNome());
-
+    	lbUsername.setText(UserHomeController.impostaUsername());
+    	lbCognome.setText(UserHomeController.impostaCognome());
+    	lbNome.setText(UserHomeController.impostaNome());
+    	if(UserHomeController.checkTipo()){
+    		lbTipoUtente.setText("Giocatore, Organizzatore");
+    	}
+    	else if (UserHomeController.checkGiocatore()) lbTipoUtente.setText("Giocatore");
+    	else if(UserHomeController.checkOrganizzatore()) lbTipoUtente.setText("Organizzatore");
+    	else lbTipoUtente.setText("Impostare tipo profilo");
+    	
+    	if(UserHomeController.checkTipo()){
+    		checkGiocatore.setSelected(true);
+    		checkOrganizzatore.setSelected(true);
+    	}
+    	else if(UserHomeController.checkOrganizzatore()){
+    		checkOrganizzatore.setSelected(true);
+    		checkGiocatore.setSelected(false);
+    	}
+    	else if(UserHomeController.checkGiocatore()){
+    		checkGiocatore.setSelected(true);
+    		checkOrganizzatore.setSelected(false);
+    	}
+    	else {
+    		checkGiocatore.setSelected(false);
+    		checkOrganizzatore.setSelected(false);
+    	}
     }
 }

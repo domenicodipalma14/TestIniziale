@@ -46,6 +46,15 @@ public class LogInController {
 			u.setPassword(l.get(2));
 			u.setNome(l.get(3));
 			u.setCognome(l.get(4));
+			if(ud.checkTitolare(username)){
+				u.setTitolare(true);
+			}
+			else {
+				List<Boolean> tipo;
+				tipo = ud.checkTipo(username);
+				u.setOrganizzatore(tipo.get(0));
+				u.setGiocatore(tipo.get(1));
+			}
 			return true;
 		}
 		else return false;
