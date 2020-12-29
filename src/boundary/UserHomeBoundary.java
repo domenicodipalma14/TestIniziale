@@ -41,18 +41,22 @@ public class UserHomeBoundary {
     @FXML
     private CheckBox checkGiocatore;
     
+    private static final String ACTION_1 = "Organizzatore, Giocatore";
+    private static final String ACTION_2 = "Giocatore";
+    private static final String ACTION_3 = "Organizzatore";
+    private static final String ACTION_4 = "Impostare tipo profilo";
     
     @FXML
     void handleCheckOrganizzatore(ActionEvent event) throws DBException, DriverException{
     	if(checkOrganizzatore.isSelected()){
-    		if(checkGiocatore.isSelected()) lbTipoUtente.setText("Organizzatore, Giocatore");
-    		else lbTipoUtente.setText("Organizzatore");
+    		if(checkGiocatore.isSelected()) lbTipoUtente.setText(ACTION_1);
+    		else lbTipoUtente.setText(ACTION_3);
     		UserHomeController.setOrganizzatore();
     	}
     	else{
     		String s = lbTipoUtente.getText();
-    		if(s.equals("Organizzatore, Giocatore")) lbTipoUtente.setText("Giocatore");
-    		else if(s.equals("Organizzatore")) lbTipoUtente.setText("Impostare tipo profilo");
+    		if(s.equals(ACTION_1)) lbTipoUtente.setText(ACTION_2);
+    		else if(s.equals(ACTION_3)) lbTipoUtente.setText(ACTION_4);
     		UserHomeController.setOrganizzatore();
     	}
     }
@@ -60,14 +64,14 @@ public class UserHomeBoundary {
     @FXML
     void handleCheckGiocatore(ActionEvent event) throws DBException, DriverException{
     	if(checkGiocatore.isSelected()){
-    		if(checkOrganizzatore.isSelected()) lbTipoUtente.setText("Organizzatore, Giocatore");
-    		else lbTipoUtente.setText("Giocatore");
+    		if(checkOrganizzatore.isSelected()) lbTipoUtente.setText(ACTION_1);
+    		else lbTipoUtente.setText(ACTION_2);
     		UserHomeController.setGiocatore();
     	}
     	else{
     		String s = lbTipoUtente.getText();
-    		if(s.equals("Organizzatore, Giocatore")) lbTipoUtente.setText("Organizzatore");
-    		else if(s.equals("Giocatore")) lbTipoUtente.setText("Impostare tipo profilo");
+    		if(s.equals(ACTION_1)) lbTipoUtente.setText(ACTION_3);
+    		else if(s.equals(ACTION_2)) lbTipoUtente.setText(ACTION_4);
     		UserHomeController.setGiocatore();
     	}
     }
@@ -78,11 +82,11 @@ public class UserHomeBoundary {
     	lbCognome.setText(UserHomeController.impostaCognome());
     	lbNome.setText(UserHomeController.impostaNome());
     	if(UserHomeController.checkTipo()){
-    		lbTipoUtente.setText("Giocatore, Organizzatore");
+    		lbTipoUtente.setText(ACTION_1);
     	}
-    	else if (UserHomeController.checkGiocatore()) lbTipoUtente.setText("Giocatore");
-    	else if(UserHomeController.checkOrganizzatore()) lbTipoUtente.setText("Organizzatore");
-    	else lbTipoUtente.setText("Impostare tipo profilo");
+    	else if (UserHomeController.checkGiocatore()) lbTipoUtente.setText(ACTION_2);
+    	else if(UserHomeController.checkOrganizzatore()) lbTipoUtente.setText(ACTION_3);
+    	else lbTipoUtente.setText(ACTION_4);
     	
     	if(UserHomeController.checkTipo()){
     		checkGiocatore.setSelected(true);
