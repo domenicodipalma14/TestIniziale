@@ -1,4 +1,4 @@
-package da;
+package dao;
 
 import java.sql.*;
 import java.time.LocalDate;
