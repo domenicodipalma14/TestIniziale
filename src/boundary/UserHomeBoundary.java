@@ -51,13 +51,13 @@ public class UserHomeBoundary {
     	if(checkOrganizzatore.isSelected()){
     		if(checkGiocatore.isSelected()) lbTipoUtente.setText(ACTION_1);
     		else lbTipoUtente.setText(ACTION_3);
-    		UserHomeController.setOrganizzatore();
+    		UserHomeController.setOrganizzatore(ACTION_3);
     	}
     	else{
     		String s = lbTipoUtente.getText();
     		if(s.equals(ACTION_1)) lbTipoUtente.setText(ACTION_2);
     		else if(s.equals(ACTION_3)) lbTipoUtente.setText(ACTION_4);
-    		UserHomeController.setOrganizzatore();
+    		UserHomeController.setOrganizzatore(ACTION_3);
     	}
     }
     
@@ -66,13 +66,13 @@ public class UserHomeBoundary {
     	if(checkGiocatore.isSelected()){
     		if(checkOrganizzatore.isSelected()) lbTipoUtente.setText(ACTION_1);
     		else lbTipoUtente.setText(ACTION_2);
-    		UserHomeController.setGiocatore();
+    		UserHomeController.setGiocatore(ACTION_2);
     	}
     	else{
     		String s = lbTipoUtente.getText();
     		if(s.equals(ACTION_1)) lbTipoUtente.setText(ACTION_3);
     		else if(s.equals(ACTION_2)) lbTipoUtente.setText(ACTION_4);
-    		UserHomeController.setGiocatore();
+    		UserHomeController.setGiocatore(ACTION_2);
     	}
     }
     

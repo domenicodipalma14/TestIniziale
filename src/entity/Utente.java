@@ -6,7 +6,7 @@ public class Utente {
 	private String username;
 	private String password;
 	private String email;
-	private String nome;
+	private String nome;// cambiare con name
 	private String cognome;
 	private boolean organizzatore = false;
 	private boolean giocatore = false;
