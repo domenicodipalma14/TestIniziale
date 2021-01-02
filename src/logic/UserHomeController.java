@@ -8,6 +8,9 @@ import error.DriverException;
 public class UserHomeController {
 	private static Utente u = LogInController.getInstance().getUtente();
 	
+	private UserHomeController(){ 
+	}
+	
 	public static String impostaUsername(){
 		return u.getUsername();
 	}
@@ -37,21 +40,12 @@ public class UserHomeController {
 	}
 	
 	public static void setOrganizzatore(String tipo) throws DBException, DriverException{
-		if(UtenteDao.setOrganizzatoreDB(u.getUsername(), tipo)){
-			u.setOrganizzatore(true);
-		}
-		else{
-			u.setOrganizzatore(false);
-		}
+			u.setOrganizzatore(UtenteDao.setTipoDB(u.getUsername(), tipo));
+	
 	}
 	
 	public static void setGiocatore(String tipo) throws DBException, DriverException{
-		if(UtenteDao.setOrganizzatoreDB(u.getUsername(), tipo)){
-			u.setGiocatore(true);
-		}
-		else{
-			u.setGiocatore(false);
-		}
+			u.setGiocatore(UtenteDao.setTipoDB(u.getUsername(), tipo));
 	}
 	
 	

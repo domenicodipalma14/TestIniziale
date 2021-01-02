@@ -16,7 +16,16 @@ public class UtenteDao{
 	private List<String> lista = new ArrayList<>();
 	private List<Boolean> tipo = new ArrayList<>();
 
-	public static boolean setOrganizzatoreDB(String username, String tipo) throws DBException, DriverException{
+	
+	/**
+	 * metodo che controlla che il tipo di utente e ne setta i valori in conseguenza all'input ricevuto
+	 * @param username dell'utente 
+	 * @param tipo indaca se l'utente vuole settare organizzatore o giocatore
+	 * @return  true se viene settato a true, false altrimenti
+	 * @throws DBException
+	 * @throws DriverException
+	 */
+	public static boolean setTipoDB(String username, String tipo) throws DBException, DriverException{
 		Connection c = conn.createConnessione();
 		Statement stm;
 		try {
@@ -31,8 +40,8 @@ public class UtenteDao{
 			}
 			else{
 				int ris = stm.executeUpdate("UPDATE Utente SET "+tipo+" = true WHERE username='"+username+"'");
-				if(ris!=0) return true;
 				conn.chiudi(stm, c);
+				if(ris!=0) return true;
 			}
 			conn.chiudi(stm, c, res);
 			return false;

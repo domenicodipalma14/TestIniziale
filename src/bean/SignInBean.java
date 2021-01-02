@@ -63,10 +63,6 @@ public class SignInBean {
 		this.cognome = cognome;
 	}
 
-	public SignInBean(){
-		//devo vedere
-	}
-
 	/**
 	 * @return the username
 	 */
