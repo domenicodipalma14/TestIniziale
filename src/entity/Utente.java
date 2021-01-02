@@ -6,13 +6,13 @@ public class Utente {
 	private String username;
 	private String password;
 	private String email;
-	private String nome;// cambiare con name
-	private String cognome;
+	private String name;
+	private String surname;
 	private boolean organizzatore = false;
 	private boolean giocatore = false;
 	private int idSquadra;
 	private int idVoto;
-	private LocalDate data; 
+	private LocalDate date; 
 	private boolean titolare = false;
 	
 	
@@ -87,45 +87,45 @@ public class Utente {
 	}
 
 	/**
-	 * @return the data
+	 * @return the date
 	 */
 	public LocalDate getData() {
-		return data;
+		return date;
 	}
 
 	/**
-	 * @param data the data to set
+	 * @param date the date to set
 	 */
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setData(LocalDate date) {
+		this.date = date;
 	}
 
 	/**
-	 * @return the nome
+	 * @return the name
 	 */
 	public String getNome() {
-		return nome;
+		return name;
 	}
 
 	/**
-	 * @param nome the nome to set
+	 * @param name the name to set
 	 */
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @return the cognome
+	 * @return the surname
 	 */
 	public String getCognome() {
-		return cognome;
+		return surname;
 	}
 
 	/**
-	 * @param cognome the cognome to set
+	 * @param surname the surname to set
 	 */
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public void setCognome(String surname) {
+		this.surname = surname;
 	}
 
 	public Utente(){}
