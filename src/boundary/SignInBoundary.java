@@ -62,7 +62,7 @@ public class SignInBoundary {
     private DatePicker txtData;
     
     @FXML
-    private ComboBox<String> comboboxCitta = new ComboBox<String>() ;
+    private ComboBox<String> comboboxCitta = new ComboBox<>() ;
     
     @FXML
     private Label label;
@@ -132,7 +132,6 @@ public class SignInBoundary {
 				comboboxCitta.getItems().add(s);
 			}
         } catch (DriverException | DBException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         comboboxCitta.setEditable(true);

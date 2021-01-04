@@ -15,7 +15,8 @@ public class UtenteDao{
 	private static ConnessioneDB conn = ConnessioneDB.getIstance();
 	private List<String> lista = new ArrayList<>();
 	private List<Boolean> tipo = new ArrayList<>();
-
+	
+	private static final String VIRGOLETTA = "'";
 	
 	/**
 	 * metodo che restituisce lo sport preferito di un utente andando a leggere nel DB
@@ -45,10 +46,14 @@ public class UtenteDao{
 		Statement stm;
 		try {
 			stm = c.createStatement();
-			int res = stm.executeUpdate("UPDATE Utente SET sport_nome='"+sport+"' WHERE username='"+username+"'");
-			conn.chiudi(stm, c);
-			if(res!=0)return true;
-			return false;
+			if(stm.executeUpdate("UPDATE Utente SET sport_nome='"+sport+"' WHERE username='"+username+"'")!=0){
+				conn.chiudi(stm, c);
+				return true;
+			}
+			else{
+				conn.chiudi(stm, c);
+				return false;
+			}
 		} catch (SQLException e) {
 			throw new DBException(e.getMessage());
 		}
@@ -158,7 +163,7 @@ public class UtenteDao{
 	public int inserisciUtente(String username, String password, String email, String nome, String cognome, LocalDate data, String citta) throws DriverException, DBException, SQLException{
 		Connection c = conn.createConnessione();
 		Statement stm = c.createStatement();
-		int  res = stm.executeUpdate("INSERT INTO Utente (username, email, passwd, nome, cognome, nascita, citta_nome) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+nome+"' , '"+cognome+"' , '"+data+"' , '"+citta+"')");
+		int  res = stm.executeUpdate("INSERT INTO Utente (username, email, passwd, nome, cognome, nascita, citta_nome) VALUES ("+VIRGOLETTA+username+VIRGOLETTA+", "+VIRGOLETTA+email+VIRGOLETTA+", "+VIRGOLETTA+password+VIRGOLETTA+","+VIRGOLETTA+nome+VIRGOLETTA+","+VIRGOLETTA+cognome+VIRGOLETTA+","+VIRGOLETTA+data+VIRGOLETTA+" , "+VIRGOLETTA+citta+VIRGOLETTA+")");
 		conn.chiudi(stm, c);
 		return res;
 	}

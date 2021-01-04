@@ -92,7 +92,6 @@ public class UserHomeBoundary {
         try {
 			c.caricaScena();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -104,7 +103,6 @@ public class UserHomeBoundary {
         try {
 			c.caricaScena();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -116,7 +114,6 @@ public class UserHomeBoundary {
         try {
 			c.caricaScena();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -128,7 +125,6 @@ public class UserHomeBoundary {
         try {
 			c.caricaScena();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -175,7 +171,6 @@ public class UserHomeBoundary {
     			organizzaPartitaButton.setVisible(true);
     			partecipaButton.setVisible(false);
     		}
-    		//UserHomeController.setOrganizzatore(ACTION_3);
     	}
     	else{
     		String s = lbTipoUtente.getText();
@@ -191,7 +186,6 @@ public class UserHomeBoundary {
     			organizzaPartitaButton.setVisible(false);
     			partecipaButton.setVisible(false);
     		}
-    		//UserHomeController.setOrganizzatore(ACTION_3);
     	}
     	UserHomeController.setOrganizzatore(ACTION_3);
     }
@@ -249,19 +243,23 @@ public class UserHomeBoundary {
     	String s = UserHomeController.checkSport();
     	if(s!=null){
 	    	switch(s){
-	    		case "Basket": 
-	    			lbSport.setText("Basket"); 
+	    		case SPORT_2: 
+	    			lbSport.setText(SPORT_2); 
 	    			radioButtonBasket.setSelected(true);
 	    			break;
-	    		case "Calcetto": 
-	    			lbSport.setText("Calcetto"); 
+	    		case SPORT_1: 
+	    			lbSport.setText(SPORT_1); 
 	    			radioButtonCalcetto.setSelected(true);
 	    			break;
-	    		case "Pallavolo": 
-	    			lbSport.setText("Pallavolo");
+	    		case SPORT_3: 
+	    			lbSport.setText(SPORT_3);
 	    			radioButtonCalcetto.setSelected(true);
 	    			break;
+	    		default:
+	    	    		lbSport.setText(SPORT_3);
+	    	    		
 	    	}
+	    	
     	}
     	else lbSport.setText("Impostare sport preferito");
     }
