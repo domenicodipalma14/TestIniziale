@@ -8,6 +8,22 @@ public class Utente {
 	private String email;
 	private String name;
 	private String surname;
+	private String citta;
+	/**
+	 * @return the citta
+	 */
+	public String getCitta() {
+		return citta;
+	}
+
+	/**
+	 * @param citta the citta to set
+	 */
+	public void setCitta(String citta) {
+		this.citta = citta;
+	}
+
+
 	private boolean organizzatore = false;
 	private boolean giocatore = false;
 	private int idSquadra;
@@ -15,7 +31,23 @@ public class Utente {
 	private LocalDate date; 
 	private boolean titolare = false;
 	
+	private String sport;
 	
+	
+	/**
+	 * @return the sport
+	 */
+	public String getSport() {
+		return sport;
+	}
+
+	/**
+	 * @param sport the sport to set
+	 */
+	public void setSport(String sport) {
+		this.sport = sport;
+	}
+
 	/**
 	 * @return the titolare
 	 */

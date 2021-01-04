@@ -18,6 +18,43 @@ public class UtenteDao{
 
 	
 	/**
+	 * metodo che restituisce lo sport preferito di un utente andando a leggere nel DB
+	 * @param username
+	 * @return stringa che indica lo sport selezionato dall'utente
+	 * @throws DBException
+	 * @throws DriverException
+	 */
+	public String getSport(String username) throws DBException, DriverException{
+		Connection c = conn.createConnessione();
+		Statement stm;
+		try{
+			stm = c.createStatement();
+			ResultSet res = stm.executeQuery("SELECT sport_nome FROM Utente WHERE  username='"+username+"'");
+			res.next();
+			String sport = res.getString("sport_nome");
+			conn.chiudi(stm, c, res);
+			return sport;
+		} catch (SQLException e){
+			throw new DBException(e.getMessage());
+		}
+	}
+	
+	
+	public static boolean setSportDB(String sport, String username) throws DBException, DriverException{
+		Connection c = conn.createConnessione();
+		Statement stm;
+		try {
+			stm = c.createStatement();
+			int res = stm.executeUpdate("UPDATE Utente SET sport_nome='"+sport+"' WHERE username='"+username+"'");
+			conn.chiudi(stm, c);
+			if(res!=0)return true;
+			return false;
+		} catch (SQLException e) {
+			throw new DBException(e.getMessage());
+		}
+		
+	}
+	/**
 	 * metodo che controlla che il tipo di utente e ne setta i valori in conseguenza all'input ricevuto
 	 * @param username dell'utente 
 	 * @param tipo indaca se l'utente vuole settare organizzatore o giocatore
@@ -100,7 +137,7 @@ public class UtenteDao{
 		Statement stm;
 		try {
 			stm = c.createStatement();
-			ResultSet res = stm.executeQuery("SELECT username, email, passwd, nome, cognome FROM Utente WHERE username='"+ username +"' AND passwd='" + password + "';" );
+			ResultSet res = stm.executeQuery("SELECT username, email, passwd, nome, cognome, citta_nome  FROM Utente WHERE username='"+ username +"' AND passwd='" + password + "';" );
 			if(!res.next()){
 				conn.chiudi(stm, c, res);
 				return Collections.emptyList();
@@ -110,6 +147,7 @@ public class UtenteDao{
 			lista.add(res.getString("passwd"));
 			lista.add(res.getString("nome"));
 			lista.add(res.getString("cognome"));
+			lista.add(res.getString("citta_nome"));
 			conn.chiudi(stm, c, res);
 			return lista;
 		} catch (SQLException e) {
@@ -117,13 +155,24 @@ public class UtenteDao{
 		}	
 	}
 	
-	public int inserisci(String username, String password, String email, String nome, String cognome, LocalDate data) throws DriverException, DBException, SQLException{
+	public int inserisciUtente(String username, String password, String email, String nome, String cognome, LocalDate data, String citta) throws DriverException, DBException, SQLException{
 		Connection c = conn.createConnessione();
 		Statement stm = c.createStatement();
-		int  res = stm.executeUpdate("INSERT INTO Utente (username, email, passwd, nome, cognome, nascita) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+nome+"' , '"+cognome+"' , '"+data+"')");
+		int  res = stm.executeUpdate("INSERT INTO Utente (username, email, passwd, nome, cognome, nascita, citta_nome) VALUES ('"+username+"', '"+email+"', '"+password+"', '"+nome+"' , '"+cognome+"' , '"+data+"' , '"+citta+"')");
 		conn.chiudi(stm, c);
 		return res;
 	}
 	
+	public List<String> selectCitta() throws DriverException, DBException, SQLException{
+		List<String> l =  new ArrayList<>();
+		Connection c = conn.createConnessione();
+		Statement stm = c.createStatement();
+		ResultSet res = stm.executeQuery("SELECT nome FROM citta");
+		while(res.next()){
+			l.add(res.getString("nome"));
+		}
+		conn.chiudi(stm, c, res);
+		return l;
+	}
 
 }

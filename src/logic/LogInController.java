@@ -27,10 +27,10 @@ public class LogInController {
 	}
 
 	/**
-	 * 
+	 * metodo che effettua il login e setta la classe utente
 	 * @param username
 	 * @param password
-	 * @return l[0] = username, l[1] = email, l[2] = password, l[3] = nome, l[4] = cognome
+	 * @return l[0] = username, l[1] = email, l[2] = password, l[3] = nome, l[4] = cognome, l[5] = sport
 	 * @throws DriverException 
 	 * @throws DBException 
 	 * @throws SQLException 
@@ -46,6 +46,7 @@ public class LogInController {
 			u.setPassword(l.get(2));
 			u.setNome(l.get(3));
 			u.setCognome(l.get(4));
+			u.setCitta(l.get(5));
 			if(ud.checkTitolare(username)){
 				u.setTitolare(true);
 			}
@@ -54,6 +55,7 @@ public class LogInController {
 				tipo = ud.checkTipo(username);
 				u.setOrganizzatore(tipo.get(0));
 				u.setGiocatore(tipo.get(1));
+				u.setSport(ud.getSport(username));
 			}
 			return true;
 		}

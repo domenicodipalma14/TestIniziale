@@ -15,6 +15,9 @@ public class UserHomeController {
 		return u.getUsername();
 	}
 	
+	public static String impostaCitta(){
+		return u.getCitta();
+	}
 	public static String impostaNome(){
 		return u.getNome();
 	}
@@ -49,5 +52,14 @@ public class UserHomeController {
 	}
 	
 	
+	public static String checkSport(){
+		return(u.getSport());
+	}
+	
+	public static void setSport(String sport) throws DBException, DriverException{
+		if(UtenteDao.setSportDB(sport, u.getUsername())){
+			u.setSport(sport);
+		}
+	}
 
 }

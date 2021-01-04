@@ -20,7 +20,22 @@ public class SignInBean {
 	private String nome;
 	private String cognome;
 	private LocalDate data;
+	private String citta;
 	
+	/**
+	 * @return the citta
+	 */
+	public String getCitta() {
+		return citta;
+	}
+
+	/**
+	 * @param citta the citta to set
+	 */
+	public void setCitta(String citta) {
+		this.citta = citta;
+	}
+
 	/**
 	 * @return the data
 	 */
@@ -159,7 +174,7 @@ public class SignInBean {
 			if(getEmail().compareTo(getConfEmail())==0) {
 				if(getPassword().compareTo(getConfPass())==0){
 				
-					if(SignInController.getIstance().registrati(getUsername(), getPassword(), getEmail(), getNome(), getCognome(), getData())){
+					if(SignInController.getIstance().registrati(getUsername(), getPassword(), getEmail(), getNome(), getCognome(), getData(), getCitta())){
 						LogInController.getInstance().login(username, password);
 						return 0;
 					}

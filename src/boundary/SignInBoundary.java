@@ -7,13 +7,16 @@ package boundary;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import logic.CaricaScenaController;
+import logic.SignInController;
 import bean.SignInBean;
 import error.DBException;
 import error.DriverException;
@@ -59,8 +62,17 @@ public class SignInBoundary {
     private DatePicker txtData;
     
     @FXML
+    private ComboBox<String> comboboxCitta = new ComboBox<String>() ;
+    
+    @FXML
     private Label label;
     private SignInBean bean = new SignInBean();
+    
+    @FXML
+    void scegliCitta(ActionEvent event) {
+    	String value = (String) comboboxCitta.getValue();
+    	bean.setCitta(value);
+    }
 
     @FXML
     void handleAnnulla(ActionEvent event) throws IOException {
@@ -112,7 +124,18 @@ public class SignInBoundary {
         assert btnAnnulla != null : "fx:id=\"btnAnnulla\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert btnSigIn != null : "fx:id=\"btnSigIn\" was not injected: check your FXML file 'SignIn.fxml'.";
         assert label != null : "fx:id=\"label\" was not injected: check your FXML file 'SignIn.fxml'.";
-
+       
+        try {
+        	List<String> listacitta;
+			listacitta = SignInController.getIstance().getCitta();
+			for(String s : listacitta){
+				comboboxCitta.getItems().add(s);
+			}
+        } catch (DriverException | DBException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        comboboxCitta.setEditable(true);
     }
 }
 
