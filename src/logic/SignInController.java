@@ -63,6 +63,6 @@ public class SignInController {
 		else if (email.isEmpty() || email.length() == 0) return false;
 		else if(passwd.isEmpty() || passwd.length() == 0) return false;
 		else if(citta == null) return false;
-		else return true;
+		return true;
 	}
 }

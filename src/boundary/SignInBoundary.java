@@ -78,6 +78,9 @@ public class SignInBoundary {
     }
     @FXML
     void handleRegTitolare(ActionEvent event) {
+    	if(SignInController.checkCampi(txtNome.getText(), txtCognome.getText(), txtData.getValue(), txtUsername.getText(), txtEmail.getText(), txtPasswd.getText(), comboboxCitta.getValue())){
+    	
+    	}else label.setText("Tutti i campi sono obbligatori");
     	/*try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Demo.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
