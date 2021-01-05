@@ -56,14 +56,6 @@ public class SignInController {
 	}
 
 	public static boolean checkCampi(String nome, String cognome, LocalDate date, String username, String email,String passwd, String citta) {
-		/*if(nome.isEmpty() || nome.length() == 0) return false;
-		else if(cognome.isEmpty() || cognome.length() == 0) return false;
-		else if(date == null) return false;
-		else if(username.isEmpty() || username.length() == 0) return false;
-		else if (email.isEmpty() || email.length() == 0) return false;
-		else if(passwd.isEmpty() || passwd.length() == 0) return false;
-		else if(citta == null) return false;*/
-		if((nome.isEmpty() || nome.length() == 0) || (cognome.isEmpty() || cognome.length() == 0) || (date == null) || (username.isEmpty() || username.length() == 0) || (email.isEmpty() || email.length() == 0) || (passwd.isEmpty() || passwd.length() == 0) || (citta == null)) return false;
-		return true;
+		return (nome.isEmpty() || nome.length() == 0 || cognome.isEmpty() || cognome.length() == 0 || date == null || username.isEmpty() || username.length() == 0 || email.isEmpty() || email.length() == 0 || passwd.isEmpty() || passwd.length() == 0 || citta == null);
 	}
 }

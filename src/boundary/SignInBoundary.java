@@ -109,7 +109,7 @@ public class SignInBoundary {
 
     @FXML
     void handleSignIn(ActionEvent event) throws DriverException, DBException, IOException, SQLException{
-    	if(SignInController.checkCampi(txtNome.getText(), txtCognome.getText(), txtData.getValue(), txtUsername.getText(), txtEmail.getText(), txtPasswd.getText(), comboboxCitta.getValue())){
+    	if(!SignInController.checkCampi(txtNome.getText(), txtCognome.getText(), txtData.getValue(), txtUsername.getText(), txtEmail.getText(), txtPasswd.getText(), comboboxCitta.getValue())){
 	    	setBean();
 	    	int check = SignInController.getIstance().checkDati();
 	    	if(check==0){
