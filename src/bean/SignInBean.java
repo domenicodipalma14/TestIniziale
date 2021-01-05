@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
 import error.DBException;
 import error.DriverException;
 
-public class SignInBean {
+public class SignInBean{
+
 	private String username;
 	private String email;
 	private String confEmail;

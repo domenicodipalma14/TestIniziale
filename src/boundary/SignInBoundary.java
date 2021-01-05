@@ -17,7 +17,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import logic.CaricaScenaController;
 import logic.SignInController;
-import bean.SignInBean;
 import error.DBException;
 import error.DriverException;
 import javafx.scene.control.Label;
@@ -48,6 +47,10 @@ public class SignInBoundary {
 
     @FXML
     private PasswordField txtCheckPaswd;
+    
+    @FXML
+    private Button btnTitolare;
+
 
     @FXML // fx:id="txtCheckEmail"
     private TextField txtCheckEmail; // Value injected by FXMLLoader
@@ -66,12 +69,32 @@ public class SignInBoundary {
     
     @FXML
     private Label label;
-    private SignInBean bean = new SignInBean();
+   
     
+    private void setBean(){
+    	SignInController.getIstance().setDatiPersonaliBean(txtNome.getText(), txtCognome.getText(), txtData.getValue(), txtUsername.getText());
+    	SignInController.getIstance().setEmailBean(txtEmail.getText(),txtCheckEmail.getText());
+    	SignInController.getIstance().setPasswdBean(txtPasswd.getText(), txtCheckPaswd.getText());
+    }
+    @FXML
+    void handleRegTitolare(ActionEvent event) {
+    	/*try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Demo.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("ABC");
+            stage.setScene(new Scene(root1));  
+            stage.show();
+          }catch(Exception e){
+        	  e.printStackTrace();
+          }*/
+    }
     @FXML
     void scegliCitta(ActionEvent event) {
     	String value = (String) comboboxCitta.getValue();
-    	bean.setCitta(value);
+    	SignInController.getIstance().setCittaBean(value);
     }
 
     @FXML
@@ -83,32 +106,29 @@ public class SignInBoundary {
 
     @FXML
     void handleSignIn(ActionEvent event) throws DriverException, DBException, IOException, SQLException{
-    	bean.setEmail(txtEmail.getText());
-    	bean.setConfEmail(txtCheckEmail.getText());
-    	bean.setPassword(txtPasswd.getText());
-    	bean.setConfPass(txtCheckPaswd.getText());
-    	bean.setUsername(txtUsername.getText());
-    	bean.setNome(txtNome.getText());
-    	bean.setCognome(txtCognome.getText());
-    	bean.setData(txtData.getValue());
-    	int check = bean.validate();
-    	if(check==0){
-    		String path = "UserHome.fxml";
-    		CaricaScenaController c = new CaricaScenaController(path, event);
-        	c.caricaScena();
+    	if(SignInController.checkCampi(txtNome.getText(), txtCognome.getText(), txtData.getValue(), txtUsername.getText(), txtEmail.getText(), txtPasswd.getText(), comboboxCitta.getValue())){
+	    	setBean();
+	    	int check = SignInController.getIstance().checkDati();
+	    	if(check==0){
+	    		String path = "UserHome.fxml";
+				CaricaScenaController c = new CaricaScenaController(path, event);
+				c.caricaScena();
+			}
+			else if(check == -1){
+				label.setText("Email non valida");
+			}
+			else if(check == 2){
+				label.setText("Email diverse");
+			}
+			else if(check == 1){
+				label.setText("Password diverse");
+			}
+			else{
+				label.setText("Username già esistente");
+			}
     	}
-    	else if(check == -1){
-    		label.setText("Email non valida");
-    	}
-    	else if(check == 2){
-    		label.setText("Email diverse");
-    	}
-    	else if(check == 1){
-    		label.setText("Password diverse");
-    	}
-    	else{
-    		label.setText("Username già esistente");
-    	}
+    	else label.setText("Tutti i campi sono obbligatori");
+ 
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
